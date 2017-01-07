@@ -15,15 +15,14 @@
  */
 package com.copperarrow.auth;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.request.Request;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,16 +30,19 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author dbeer
  */
 public class SecureWebSession extends AuthenticatedWebSession {
-    private static Logger logger = LogManager.getLogger(SecureWebSession.class);    
+    private static Logger logger = LogManager.getLogger(SecureWebSession.class);
 
     private HttpSession httpSession;
 
-    @Autowired
+    @SpringBean(name = "authenticationManger")
     private AuthenticationManager authenticationManager;
 
     public SecureWebSession(Request request) {
@@ -50,7 +52,7 @@ public class SecureWebSession extends AuthenticatedWebSession {
     }
 
     @Override
-    protected boolean authenticate(String username, String password) {
+    public boolean authenticate(String username, String password) {
         try {
             Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             if (auth.isAuthenticated()) {

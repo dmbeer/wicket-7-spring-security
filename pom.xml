@@ -8,7 +8,7 @@
     <artifactId>wicket-7-spring-security</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>wicket-7-spring-security</name>
+    <name>wicket-6-spring-security-3</name>
     <description></description>
     <licenses>
         <license>
@@ -18,7 +18,7 @@
         </license>
     </licenses>
     <properties>
-        <wicket.version>7.6.0</wicket.version>
+        <wicket.version>6.26.0</wicket.version>
         <jetty9.version>9.2.19.v20160908</jetty9.version>
         <log4j.version>2.6.2</log4j.version>
         <junit.version>4.12</junit.version>
@@ -45,18 +45,38 @@
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-spring</artifactId>
             <version>${wicket.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         <!-- Spring Security -->
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>3.0.7.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>3.0.7.RELEASE</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>4.2.1.RELEASE</version>
+            <version>3.1.7.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>4.2.1.RELEASE</version>
+            <version>3.1.7.RELEASE</version>
         </dependency>
 
         <!-- LOGGING DEPENDENCIES - LOG4J -->
