@@ -17,6 +17,7 @@ package com.copperarrow;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -37,6 +38,15 @@ public class UserPage extends WebPage {
         } else {
             add(new Label("username", "error"));
         }
+
+        add(new Link<Void>("logoutLink"){
+
+            @Override
+            public void onClick() {
+                getSession().invalidate();
+            }
+
+        });
         
     }
 
