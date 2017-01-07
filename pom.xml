@@ -19,8 +19,8 @@
     </licenses>
     <properties>
         <wicket.version>6.26.0</wicket.version>
-        <spring.version>3.0.7.RELEASE</spring.version>
-        <spring.security.version>3.1.7.RELEASE</spring.security.version>
+        <spring.version>4.1.6.RELEASE</spring.version>
+        <spring.security.version>3.2.10.RELEASE</spring.security.version>
         <jetty9.version>9.2.19.v20160908</jetty9.version>
         <log4j.version>2.6.2</log4j.version>
         <junit.version>4.12</junit.version>
@@ -71,9 +71,20 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
             <version>${spring.security.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-expression</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
