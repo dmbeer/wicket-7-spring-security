@@ -30,16 +30,16 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.flow.RedirectToUrlException;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
 /**
- *
  * @author dbeer
  */
 public class LoginPage extends WebPage {
-    
+
     private static Logger logger = LogManager.getLogger(LoginPage.class);
 
     public LoginPage(PageParameters parameters) {
@@ -67,18 +67,22 @@ public class LoginPage extends WebPage {
             HttpServletRequest servletRequest = (HttpServletRequest) RequestCycle.get().getRequest().getContainerRequest();
             String originalUrl = getOriginalUrl(servletRequest.getSession());
             AuthenticatedWebSession session = AuthenticatedWebSession.get();
-            if (session.signIn(username, password)) {
-                if (originalUrl != null) {
-                    logger.info(String.format("redirecting to %s", originalUrl));
-                    throw new RedirectToUrlException(originalUrl);
-                } else {
-                    logger.info("redirecting to home page");
-                    setResponsePage(getApplication().getHomePage());
+            try {
+                boolean signin = session.signIn(username, password);
+                if (signin) {
+                    if (originalUrl != null) {
+                        logger.info(String.format("redirecting to %s", originalUrl));
+                        throw new RedirectToUrlException(originalUrl);
+                    } else {
+                        logger.info("redirecting to home page");
+                        setResponsePage(getApplication().getHomePage());
+                    }
                 }
-            } else {
-                error("Login failed due to invalid credentials");
+            } catch (AuthenticationException e) {
+                error(e.getMessage());
             }
         }
+
 
         /**
          * Returns the URL the user accessed before he was redirected to the login page. This URL has been stored in the session by spring

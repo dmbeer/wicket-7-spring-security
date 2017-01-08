@@ -53,7 +53,6 @@ public class SecureWebSession extends AuthenticatedWebSession {
 
     @Override
     public boolean authenticate(String username, String password) {
-        try {
             Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             if (auth.isAuthenticated()) {
                 // the authentication object has to be stored in the SecurityContextHolder and in the HttpSession manually, so that the
@@ -65,10 +64,6 @@ public class SecureWebSession extends AuthenticatedWebSession {
             } else {
                 return false;
             }
-        } catch (AuthenticationException e) {
-            logger.warn("Failed login attempt due to exception!", e);
-            return false;
-        }
     }
 
     @Override
