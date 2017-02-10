@@ -1,6 +1,9 @@
 package com.copperarrow;
 
 import com.copperarrow.auth.SecureWebSession;
+import com.copperarrow.pages.HomePage;
+import com.copperarrow.pages.LoginPage;
+import com.copperarrow.pages.UserPage;
 import org.apache.wicket.Application;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;

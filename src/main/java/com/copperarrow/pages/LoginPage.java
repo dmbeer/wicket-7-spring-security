@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.copperarrow;
+package com.copperarrow.pages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

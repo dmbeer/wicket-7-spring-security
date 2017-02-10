@@ -1,5 +1,6 @@
-package com.copperarrow;
+package com.copperarrow.pages;
 
+import com.copperarrow.WicketApplicationTest;
 import com.copperarrow.auth.config.SecurityWebApplicationInitializer;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
