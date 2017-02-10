@@ -1,10 +1,14 @@
 package com.copperarrow;
 
 import com.copperarrow.auth.SecureWebSession;
+import org.apache.wicket.Application;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
+import org.apache.wicket.cdi.CdiConfiguration;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.wicketstuff.javaee.injection.JavaEEComponentInjector;
+import org.wicketstuff.javaee.naming.global.ModuleJndiNamingStrategy;
 
 /**
  * Application object for your web application.
@@ -13,6 +17,20 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
  * @see com.copperarrow.Start#main(String[])
  */
 public class WicketApplication extends AuthenticatedWebApplication {
+
+    public WicketApplication() {
+        super();
+    }
+
+    /**
+     * Get Application for current thread.
+     *
+     * @return The current thread's Application
+     */
+    public static WicketApplication get() {
+        return (WicketApplication) Application.get();
+    }
+
     /**
      * @see org.apache.wicket.Application#getHomePage()
      */
@@ -28,9 +46,16 @@ public class WicketApplication extends AuthenticatedWebApplication {
     public void init() {
         super.init();
 
+        configureCDIEJB();
         getComponentInstantiationListeners().add(new SpringComponentInjector(this));
+
         mountPage("login", LoginPage.class);
         mountPage("user", UserPage.class);
+    }
+
+    private void configureCDIEJB() {
+        getComponentInstantiationListeners().add(new JavaEEComponentInjector(this, new ModuleJndiNamingStrategy()));
+        new CdiConfiguration().configure(this);
     }
 
     @Override
