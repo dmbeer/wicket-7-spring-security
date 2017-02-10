@@ -15,6 +15,7 @@
  */
 package com.copperarrow.pages;
 
+import com.copperarrow.model.UserAccount;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -32,8 +33,8 @@ public class UserPage extends WebPage {
         super(parameters);
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof User) {
-            String username = ((User) principal).getUsername();
+        if (principal != null && principal instanceof UserAccount) {
+            String username = ((UserAccount) principal).getUserName();
             add(new Label("username", username));
         } else {
             add(new Label("username", "error"));
