@@ -1,5 +1,6 @@
 package com.copperarrow.pages;
 
+import com.copperarrow.pages.components.UsersPanel;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
 
@@ -10,6 +11,6 @@ import org.apache.wicket.markup.html.WebPage;
 public class AdminPage extends WebPage {
 
     public AdminPage() {
-        
+        add(new UsersPanel("users-panel"));
     }
 }

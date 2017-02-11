@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/user").authenticated()
+                .antMatchers("/user", "/admin").authenticated()
                 .and().formLogin().loginPage("/login").loginProcessingUrl("/process-login").failureUrl("/login?error=true")
                 .and().addFilter(new SecurityContextPersistenceFilter()).securityContext();
     }    

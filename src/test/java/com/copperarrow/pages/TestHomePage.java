@@ -20,8 +20,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @WithAnonymousUser
 public class TestHomePage extends WicketApplicationTest {
 	private WicketTester tester;
-	@Autowired
-	private ApplicationContext ctx;
 
 	@Before
 	public void setUp() throws Exception {

@@ -25,8 +25,6 @@ import static org.junit.Assert.assertNotNull;
 public class UserPageTest extends WicketApplicationTest {
 
     private WicketTester tester;
-    @Autowired
-    private ApplicationContext ctx;
 
     @Before
     public void setUp() throws Exception {
