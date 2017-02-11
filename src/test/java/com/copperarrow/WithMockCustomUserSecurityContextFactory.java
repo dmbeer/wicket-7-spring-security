@@ -1,7 +1,9 @@
 package com.copperarrow;
 
 import com.copperarrow.auth.config.CustomUserAccountDetails;
+import com.copperarrow.model.Role;
 import com.copperarrow.model.UserAccount;
+import com.copperarrow.model.UserRole;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -18,11 +20,11 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
     @Override
     public SecurityContext createSecurityContext(WithMockUserAccount customUser) {
         SecurityContext context = SecurityContextHolder.createEmptyContext();
-//        UserRole userRole = new UserRole();
-//        userRole.setRole(Role.USER);
-//        List<UserRole> userRoles = new ArrayList<>();
-//        userRoles.add(userRole);
-        UserAccount userAccount = new UserAccount(1L, "first", "last", "joe@example.com", "user", "password", 1);
+        UserRole userRole = new UserRole();
+        userRole.setRole(Role.USER);
+        List<UserRole> userRoles = new ArrayList<>();
+        userRoles.add(userRole);
+        UserAccount userAccount = new UserAccount(1L, "first", "last", "joe@example.com", "user", "password", 1, userRoles);
 
         CustomUserAccountDetails principal =
                 new CustomUserAccountDetails(userAccount, new ArrayList<>());

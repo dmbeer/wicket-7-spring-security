@@ -16,6 +16,7 @@
 package com.copperarrow.auth;
 
 
+import com.copperarrow.model.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
@@ -27,6 +28,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
@@ -68,7 +70,22 @@ public class SecureWebSession extends AuthenticatedWebSession {
 
     @Override
     public Roles getRoles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Roles roles = new Roles();
+        if (isSignedIn()) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            addRolesFromAuthentication(roles, authentication);
+        }
+        return roles;
+    }
+
+    private void addRolesFromAuthentication(Roles roles, Authentication authentication) {
+        for (GrantedAuthority authority : authentication.getAuthorities()) {
+            roles.add(authority.getAuthority());
+        }
+    }
+
+    public boolean hasRole(Role role) {
+        return getRoles().hasRole(role.getSpringSecurityRoleName());
     }
 
 }

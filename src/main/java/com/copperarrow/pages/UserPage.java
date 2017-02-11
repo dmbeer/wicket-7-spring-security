@@ -16,17 +16,18 @@
 package com.copperarrow.pages;
 
 import com.copperarrow.model.UserAccount;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 
 /**
  *
  * @author dbeer
  */
+@AuthorizeInstantiation({"ROLE_USER", "ROLE_ADMIN"})
 public class UserPage extends WebPage {
 
     public UserPage(PageParameters parameters) {

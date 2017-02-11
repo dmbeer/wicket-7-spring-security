@@ -1,6 +1,7 @@
 package com.copperarrow.auth.config;
 
 import com.copperarrow.model.UserAccount;
+import com.copperarrow.model.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,9 +16,9 @@ import java.util.List;
 public class CustomUserAccountDetails extends UserAccount implements UserDetails {
 
     private static final long serialVersionUID = 1L;
-    private List<String> userRoles;
+    private List<UserRole> userRoles;
 
-    public CustomUserAccountDetails(UserAccount userAccount, List<String> userRoles) {
+    public CustomUserAccountDetails(UserAccount userAccount, List<UserRole> userRoles) {
         super(userAccount);
         this.userRoles = userRoles;
     }

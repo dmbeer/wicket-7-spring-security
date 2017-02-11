@@ -3,6 +3,7 @@ package com.copperarrow.auth.config.service;
 import com.copperarrow.auth.config.CustomUserAccountDetails;
 import com.copperarrow.dao.UserDAO;
 import com.copperarrow.model.UserAccount;
+import com.copperarrow.model.UserRole;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             logger.fatal("Username {} not Found", username);
             throw new UsernameNotFoundException("No userAccount present with username: " + username);
         } else {
-            List<String> userRoles = new ArrayList<>();
+            List<UserRole> userRoles = userAccount.getUserRoles();
             return new CustomUserAccountDetails(userAccount, userRoles);
         }
 //        return null;

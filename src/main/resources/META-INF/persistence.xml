@@ -5,6 +5,7 @@
         <jta-data-source>java:/PostgresDSTest</jta-data-source>
         <mapping-file>META-INF/orm.xml</mapping-file>
         <class>com.copperarrow.model.UserAccount</class>
+        <class>com.copperarrow.model.UserRole</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="${schema.generation}"/>

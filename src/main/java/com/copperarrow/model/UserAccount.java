@@ -2,6 +2,7 @@ package com.copperarrow.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by dbeer on 10/02/17.
@@ -34,6 +35,9 @@ public class UserAccount implements Serializable {
     @Column(name = "enabled")
     private int enabled;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<UserRole> userRoles;
+
     public UserAccount() {
     }
 
@@ -45,9 +49,10 @@ public class UserAccount implements Serializable {
         this.email = userAccount.email;
         this.password = userAccount.password;
         this.enabled = userAccount.enabled;
+        this.userRoles = userAccount.userRoles;
     }
 
-    public UserAccount(Long userid, String firstName, String lastName, String email, String userName, String password, int enabled) {
+    public UserAccount(Long userid, String firstName, String lastName, String email, String userName, String password, int enabled, List<UserRole> userRoles) {
         this.userid = userid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -55,6 +60,7 @@ public class UserAccount implements Serializable {
         this.userName = userName;
         this.password = password;
         this.enabled = enabled;
+        this.userRoles = userRoles;
     }
 
     public Long getUserid() {
@@ -111,5 +117,13 @@ public class UserAccount implements Serializable {
 
     public void setEnabled(int enabled) {
         this.enabled = enabled;
+    }
+
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }
