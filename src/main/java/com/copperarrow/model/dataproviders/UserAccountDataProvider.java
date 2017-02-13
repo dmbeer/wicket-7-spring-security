@@ -1,17 +1,19 @@
 package com.copperarrow.model.dataproviders;
 
-import com.copperarrow.dao.UserDAO;
-import com.copperarrow.model.UserAccount;
-import org.apache.wicket.cdi.NonContextual;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
+import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.ejb.Stateless;
+
+import com.copperarrow.dao.UserDAO;
+import com.copperarrow.model.UserAccount;
 
 /**
  * Created by dbeer on 11/02/17.
@@ -19,22 +21,16 @@ import java.util.List;
 @Stateless(name = "UserAcDataProvider")
 public class UserAccountDataProvider extends SortableDataProvider<UserAccount, String> {
 
-    @EJB(name = "UserDAO")
+    @SpringBean
     private UserDAO userDAO;
 
     public UserAccountDataProvider() {
+        Injector.get().inject(this);
         setSort("firstName", SortOrder.ASCENDING);
-    }
-
-    private void getDAO() {
-        if (userDAO == null) {
-            NonContextual.of(UserAccountDataProvider.class).inject(this);
-        }
     }
 
     @Override
     public Iterator<UserAccount> iterator(long first, long last) {
-        getDAO();
         List<UserAccount> users = userDAO.sort(getSort().toString(), "firstName");
 
         return users.subList((int)first, (int)(first + last)).iterator();
@@ -42,7 +38,6 @@ public class UserAccountDataProvider extends SortableDataProvider<UserAccount, S
 
     @Override
     public long size() {
-        getDAO();
         return userDAO.size();
     }
 
