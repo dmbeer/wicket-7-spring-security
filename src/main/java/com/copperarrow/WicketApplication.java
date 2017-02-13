@@ -1,6 +1,7 @@
 package com.copperarrow;
 
 import com.copperarrow.auth.SecureWebSession;
+import com.copperarrow.dao.UserDAO;
 import com.copperarrow.pages.AdminPage;
 import com.copperarrow.pages.HomePage;
 import com.copperarrow.pages.LoginPage;
@@ -8,11 +9,9 @@ import com.copperarrow.pages.UserPage;
 import org.apache.wicket.Application;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
-import org.apache.wicket.cdi.CdiConfiguration;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
-import org.wicketstuff.javaee.injection.JavaEEComponentInjector;
-import org.wicketstuff.javaee.naming.global.ModuleJndiNamingStrategy;
+import org.apache.wicket.spring.test.ApplicationContextMock;
 
 /**
  * Application object for your web application.
@@ -50,6 +49,7 @@ public class WicketApplication extends AuthenticatedWebApplication {
         super.init();
 
         configureCDIEJB();
+
         getComponentInstantiationListeners().add(new SpringComponentInjector(this));
 
         mountPage("login", LoginPage.class);
@@ -58,7 +58,7 @@ public class WicketApplication extends AuthenticatedWebApplication {
     }
 
     private void configureCDIEJB() {
-        getComponentInstantiationListeners().add(new JavaEEComponentInjector(this, new ModuleJndiNamingStrategy()));
+//        getComponentInstantiationListeners().add(new JavaEEComponentInjector(this, new ModuleJndiNamingStrategy()));
 //        new CdiConfiguration().configure(this);
     }
 

@@ -34,7 +34,7 @@ public class UserPage extends WebPage {
         super(parameters);
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal != null && principal instanceof UserAccount) {
+        if (principal instanceof UserAccount) {
             String username = ((UserAccount) principal).getUserName();
             add(new Label("username", username));
         } else {

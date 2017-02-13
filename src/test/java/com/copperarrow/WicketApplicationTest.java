@@ -1,15 +1,14 @@
 package com.copperarrow;
 
 import org.apache.wicket.Page;
-import org.apache.wicket.cdi.CdiConfiguration;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.spring.test.ApplicationContextMock;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.springframework.stereotype.Component;
-import org.wicketstuff.javaee.injection.JavaEEComponentInjector;
-import org.wicketstuff.javaee.naming.global.ModuleJndiNamingStrategy;
+
+import com.copperarrow.dao.UserDAO;
 
 /**
  * Created by dbeer on 15/01/17.
@@ -44,7 +43,6 @@ public abstract class WicketApplicationTest {
                 //Configures the SpringBean annotation support to use the mock application context.
                 //This ensures that the mock objects are injected instead of the actual bean classes.
                 getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContextMock));
-                getComponentInstantiationListeners().add(new JavaEEComponentInjector(this, new ModuleJndiNamingStrategy()));
                 WicketApplicationTest.this.init(this);
             }
 

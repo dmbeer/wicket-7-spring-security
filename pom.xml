@@ -64,16 +64,16 @@
             <artifactId>wicket-auth-roles</artifactId>
             <version>${wicket.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-cdi-1.1</artifactId>
-            <version>${wicket.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wicketstuff</groupId>
-            <artifactId>wicketstuff-javaee-inject</artifactId>
-            <version>${wicket.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.wicket</groupId>-->
+            <!--<artifactId>wicket-cdi-1.1</artifactId>-->
+            <!--<version>${wicket.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.wicketstuff</groupId>-->
+            <!--<artifactId>wicketstuff-javaee-inject</artifactId>-->
+            <!--<version>${wicket.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-spring</artifactId>
@@ -142,11 +142,11 @@
         </dependency>
 
         <!-- java ee7 -->
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javax.enterprise</groupId>-->
+            <!--<artifactId>cdi-api</artifactId>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
